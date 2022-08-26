@@ -1,35 +1,46 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 
 
 class Home extends StatelessWidget {
-  final Stream<Map<String,int>> mapStream;
+  final Stream<int> valueAStream;
+  final Stream<int> valueBStream;
+  final Stream<int> sumStream;
 
-  const Home({Key? key, required this.mapStream}) : super(key: key);
+  const Home({Key? key, required this.valueAStream, required this.valueBStream, required this.sumStream}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const style = TextStyle(fontSize: 20);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(50),
         child: Center(
-          child: StreamBuilder(
-            stream: mapStream,
-            builder: (context, snapshot){
-              late Map map;
-              const style = TextStyle(fontSize: 20);
-              if(snapshot.data != null){
-                map = jsonDecode(jsonEncode(snapshot.data));
-              }
-              return Column(
-                children: [
-                  Text("Número 1 = ${snapshot.data !=null ? map['valueA'] : 0}", style: style,),
-                  Text("Número 2 = ${snapshot.data !=null ? map['valueB'] : 0} ", style: style),
-                  Text("Suma = ${snapshot.data !=null ? map['sum'] : 0}", style: style)
-                ],
-              );
-            },
-          ),
+          child: Column(
+            children: [
+              StreamBuilder(
+                stream: valueAStream,
+                builder: (context, AsyncSnapshot<int> snapshot){
+                  return Text(
+                    "Número 1 = ${snapshot.data ?? 0}", 
+                    style: style
+                  );
+                },
+              ),
+              StreamBuilder(
+                stream: valueBStream,
+                builder: (context, AsyncSnapshot<int> snapshot){
+                  return Text("Número 2 = ${snapshot.data ?? 0}", style: style,);
+                },
+              ),
+              StreamBuilder(
+                stream: sumStream,
+                builder: (context, AsyncSnapshot<int> snapshot){
+                  // print(snapshot.data);
+                  return Text("Suma = ${snapshot.data ?? 0}", style: style,);
+                },
+              ),
+            ],
+          )
      ),
       ),
    );

@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Steam and StreamController'),
         ),
-        body: Home(mapStream: streamBloc.mapaSumaStream,),
+        body: Home(
+          valueAStream: streamBloc.valueAStream,
+          valueBStream: streamBloc.valueBStream,
+          sumStream: streamBloc.sumStream
+          ),
       ),
     );
   }
