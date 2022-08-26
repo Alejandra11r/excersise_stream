@@ -10,12 +10,13 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 20);
+    const style = TextStyle(fontSize: 30);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(50),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               StreamBuilder(
                 stream: valueAStream,
@@ -31,6 +32,9 @@ class Home extends StatelessWidget {
                 builder: (context, AsyncSnapshot<int> snapshot){
                   return Text("Número 2 = ${snapshot.data ?? 0}", style: style,);
                 },
+              ),
+              SizedBox(
+                height: 20,
               ),
               StreamBuilder(
                 stream: sumStream,

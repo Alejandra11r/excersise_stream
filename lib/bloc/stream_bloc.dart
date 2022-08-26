@@ -28,8 +28,10 @@ class StreamBloc {
       b += clock.tick;
       _myStreamA.sink.add(a);
       valueA = a;
-      _myStreamB.sink.add(b);
-      valueB = b;
+      if (clock.tick%5 == 0) {
+        _myStreamB.sink.add(b);
+        valueB = b;
+      }
       _myStreamSum.sink.add(sum(valueA, valueB));
     });
   }
