@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
                   return Text("Número 2 = ${snapshot.data ?? 0}", style: style,);
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               StreamBuilder(
